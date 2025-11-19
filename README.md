@@ -43,3 +43,11 @@ Unit tests are located in the `tests/` directory and can be run with:
 ```bash
 pytest --cov
 ```
+
+## Requirements
+All project dependencies are listed in requirements.txt.
+To install them, run:
+
+```bash
+pip install -r requirements.txt
+```
