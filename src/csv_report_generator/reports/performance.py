@@ -12,7 +12,7 @@ class PerformanceReportRow:
     average_performance: Decimal
 
 
-class PerformanceReport(Report):
+class PerformanceReport(Report[PerformanceReportRow]):
     @property
     def name(self) -> str:
         return "performance"
@@ -28,7 +28,7 @@ class PerformanceReport(Report):
                 raise InvalidRowError(
                     path=str(record.source),
                     line_number=record.line_number,
-                    reason="missing 'position' or 'performance' column",
+                    reason="missing 'position' or 'performance' value",
                 )
 
             try:
@@ -50,11 +50,11 @@ class PerformanceReport(Report):
         for position, performances in performance_data.items():
             average_performance = round(
                 sum(performances) / len(performances), 
-                2
+                2,
             )
             report_rows.append(PerformanceReportRow(position, average_performance))
 
         return sorted(
             report_rows, 
-            key=lambda row: row.average_performance
+            key=lambda row: row.average_performance,
         )
