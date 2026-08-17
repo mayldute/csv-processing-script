@@ -5,6 +5,7 @@ from pathlib import Path
 from csv_report_generator.exceptions import (
     CSVFileNotFoundError,
     InvalidCSVFileError,
+    MissingColumnsError,
 )
 from csv_report_generator.models import CSVRecord
 from csv_report_generator.readers.base import DataReader
@@ -43,6 +44,17 @@ class CSVReader(DataReader):
                     raise InvalidCSVFileError(
                         str(path),
                         "CSV header is missing.",
+                    )
+
+                required_columns = {"position", "performance"}
+                actual_columns = {column.strip() for column in reader.fieldnames}
+
+                missing_columns = required_columns - actual_columns
+
+                if missing_columns:
+                    raise MissingColumnsError(
+                        str(path),
+                        missing_columns,
                     )
 
                 for line_number, row in enumerate(reader, start=2):

@@ -5,6 +5,7 @@ from csv_report_generator.readers.csv_reader import CSVReader
 from csv_report_generator.exceptions import (
     CSVFileNotFoundError,
     InvalidCSVFileError,
+    MissingColumnsError,
 )
 
 
@@ -84,3 +85,34 @@ def test_read_directory_instead_of_file(tmp_path: Path):
         reader.read([directory])
 
     assert str(directory) in str(exc_info.value)
+
+
+def test_read_csv_with_missing_columns(tmp_path: Path):
+    csv_file = tmp_path / "employees.csv"
+    csv_file.write_text(
+        "position,salary\nDeveloper,1000\n",
+        encoding="utf-8",
+    )
+
+    reader = CSVReader()
+
+    with pytest.raises(MissingColumnsError) as exc_info:
+        reader.read([csv_file])
+
+    assert "performance" in str(exc_info.value)
+    assert "missing required columns" in str(exc_info.value)
+
+
+def test_read_csv_without_header(tmp_path: Path):
+    csv_file = tmp_path / "employees.csv"
+    csv_file.write_text(
+        "",
+        encoding="utf-8",
+    )
+
+    reader = CSVReader()
+
+    with pytest.raises(InvalidCSVFileError) as exc_info:
+        reader.read([csv_file])
+
+    assert "CSV header is missing." in str(exc_info.value)

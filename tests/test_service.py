@@ -3,7 +3,7 @@ from pathlib import Path
 
 from csv_report_generator.services import ReportService
 from csv_report_generator.exceptions import (
-    CSVFileNotFoundError, 
+    CSVFileNotFoundError,
     UnknownReportError,
 )
 
@@ -58,6 +58,7 @@ def test_generate_report_file_not_found(mocker):
 
     assert "File not found" in str(exc_info.value)
     registry.get_report.assert_not_called()
+
 
 def test_generate_report_unknown_report(mocker):
     reader = mocker.Mock()
