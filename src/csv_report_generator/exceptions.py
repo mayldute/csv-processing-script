@@ -9,6 +9,7 @@ class CSVReportGeneratorError(Exception):
 
 class CSVReadError(CSVReportGeneratorError):
     """Exception raised for errors in reading CSV files."""
+
     default_message = "Failed to read the CSV file."
 
 
@@ -77,8 +78,7 @@ class UnknownReportError(CSVReportGeneratorError):
         available = ", ".join(available_reports) or "none"
 
         super().__init__(
-            f"Unknown report '{report_name}'. "
-            f"Available reports: {available}."
+            f"Unknown report '{report_name}'. Available reports: {available}."
         )
 
 
@@ -88,6 +88,4 @@ class DuplicateReportError(CSVReportGeneratorError):
     def __init__(self, report_name: str) -> None:
         self.report_name = report_name
 
-        super().__init__(
-            f"Report '{report_name}' is already registered."
-        )
+        super().__init__(f"Report '{report_name}' is already registered.")

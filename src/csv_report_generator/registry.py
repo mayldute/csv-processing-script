@@ -1,7 +1,4 @@
-from cvs_report_generator.exceptions import (
-    UnknownReportError, 
-    DuplicateReportError
-)
+from cvs_report_generator.exceptions import UnknownReportError, DuplicateReportError
 from cvs_report_generator.reports.base import Report
 
 
@@ -12,7 +9,7 @@ class ReportRegistry:
     def register(self, report: Report) -> None:
         if report.name in self._reports:
             raise DuplicateReportError(report_name=report.name)
-        
+
         self._reports[report.name] = report
 
     def get_report(self, report_name: str):
@@ -23,5 +20,5 @@ class ReportRegistry:
                 report_name=report_name,
                 available_reports=tuple(self._reports),
             )
-        
+
         return report

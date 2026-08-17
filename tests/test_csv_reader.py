@@ -3,7 +3,7 @@ from pathlib import Path
 
 from csv_report_generator.readers.csv_reader import CSVReader
 from csv_report_generator.exceptions import (
-    CSVFileNotFoundError, 
+    CSVFileNotFoundError,
     InvalidCSVFileError,
 )
 
@@ -11,9 +11,7 @@ from csv_report_generator.exceptions import (
 def test_read_valid_csv(tmp_path: Path):
     csv_file = tmp_path / "employees.csv"
     csv_file.write_text(
-        "position,performance\n"
-        "Developer,90\n"
-        "QA,80\n",
+        "position,performance\nDeveloper,90\nQA,80\n",
         encoding="utf-8",
     )
 
@@ -28,6 +26,7 @@ def test_read_valid_csv(tmp_path: Path):
     assert records[1].values == {"position": "QA", "performance": "80"}
     assert records[1].source == csv_file
     assert records[1].line_number == 3
+
 
 def test_read_missing_csv_file(tmp_path: Path):
     missing_file = tmp_path / "missing.csv"
@@ -39,12 +38,11 @@ def test_read_missing_csv_file(tmp_path: Path):
 
     assert str(missing_file) in str(exc_info.value)
 
-def test_read_with_wrong_extension(tmp_path: Path):
+
+def test_read_file_with_wrong_extension(tmp_path: Path):
     wrong_file = tmp_path / "data.txt"
     wrong_file.write_text(
-        "position,performance\n"
-        "Developer,90\n"
-        "QA,80\n",
+        "position,performance\nDeveloper,90\nQA,80\n",
         encoding="utf-8",
     )
 
@@ -55,13 +53,11 @@ def test_read_with_wrong_extension(tmp_path: Path):
 
     assert str(wrong_file) in str(exc_info.value)
 
-def test_read_cvs_with_empty_rows(tmp_path: Path):
+
+def test_read_csv_with_empty_rows(tmp_path: Path):
     csv_file = tmp_path / "employees.csv"
     csv_file.write_text(
-        "position,performance\n"
-        "Developer,90\n"
-        "\n"
-        "QA,80\n",
+        "position,performance\nDeveloper,90\n\nQA,80\n",
         encoding="utf-8",
     )
 
@@ -76,6 +72,7 @@ def test_read_cvs_with_empty_rows(tmp_path: Path):
     assert records[1].values == {"position": "QA", "performance": "80"}
     assert records[1].source == csv_file
     assert records[1].line_number == 3
+
 
 def test_read_directory_instead_of_file(tmp_path: Path):
     directory = tmp_path / "employees.csv"

@@ -10,7 +10,9 @@ class ReportService:
         self.reader = reader
         self.registry = registry
 
-    def generate(self, file_paths: Sequence[Path], report_name: str) -> Sequence[object]:
+    def generate(
+        self, file_paths: Sequence[Path], report_name: str
+    ) -> Sequence[object]:
         records = self.reader.read(file_paths)
         report = self.registry.get_report(report_name)
         return report.generate(records)

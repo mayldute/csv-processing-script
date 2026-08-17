@@ -49,12 +49,12 @@ class PerformanceReport(Report[PerformanceReportRow]):
 
         for position, performances in performance_data.items():
             average_performance = round(
-                sum(performances) / len(performances), 
+                sum(performances) / len(performances),
                 2,
             )
             report_rows.append(PerformanceReportRow(position, average_performance))
 
         return sorted(
-            report_rows, 
+            report_rows,
             key=lambda row: row.average_performance,
         )
