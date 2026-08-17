@@ -1,5 +1,7 @@
 # CSV Report Generator
 
+[![CI](https://github.com/mayldute/csv-processing-script/actions/workflows/ci.yml/badge.svg)](https://github.com/mayldute/csv-processing-script/actions/workflows/ci.yml)
+
 Production-oriented Python application for processing CSV datasets and generating analytical reports through an extensible report architecture.
 
 ## Features
@@ -225,6 +227,19 @@ Automatically fix supported lint issues:
 ```bash
 uv run ruff check . --fix
 ```
+## Continuous Integration
+
+The project uses GitHub Actions to automatically validate every push and pull request.
+
+The CI pipeline:
+
+- installs Python and project dependencies;
+- runs Ruff linting;
+- runs the complete pytest test suite.
+
+A change is considered valid only when all CI checks pass.
+
+The workflow is defined in `.github/workflows/ci.yml`.
 
 ## Adding a New Report
 
@@ -280,7 +295,10 @@ uv run pytest
 uv run ruff format .
 uv run ruff check .
 ```
+```markdown
+These checks are also executed automatically by GitHub Actions on every push and pull request.
+```
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/mayldute/csv-processing-script/blob/main/LICENSE) file for details.
