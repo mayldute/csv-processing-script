@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 
-from csv_report_generator.reports.base import Report
-from csv_report_generator.models import CSVRecord
 from csv_report_generator.exceptions import InvalidRowError
+from csv_report_generator.models import CSVRecord
+from csv_report_generator.reports.base import Report
 
 
 @dataclass(frozen=True, slots=True)

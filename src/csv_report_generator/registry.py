@@ -1,4 +1,4 @@
-from csv_report_generator.exceptions import UnknownReportError, DuplicateReportError
+from csv_report_generator.exceptions import DuplicateReportError, UnknownReportError
 from csv_report_generator.reports.base import Report
 
 
