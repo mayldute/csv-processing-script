@@ -1,5 +1,5 @@
-from cvs_report_generator.exceptions import UnknownReportError, DuplicateReportError
-from cvs_report_generator.reports.base import Report
+from csv_report_generator.exceptions import UnknownReportError, DuplicateReportError
+from csv_report_generator.reports.base import Report
 
 
 class ReportRegistry:
