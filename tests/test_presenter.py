@@ -1,5 +1,6 @@
-import pytest
 from decimal import Decimal
+
+import pytest
 
 from csv_report_generator.presenters import TablePresenter
 from csv_report_generator.reports.performance import PerformanceReportRow

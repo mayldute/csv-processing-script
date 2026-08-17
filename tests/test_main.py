@@ -8,22 +8,20 @@ def test_main_success(capsys):
     with patch(
         "csv_report_generator.__main__.ReportService.generate",
         return_value=[],
+    ), patch(
+        "csv_report_generator.__main__.TablePresenter.present",
+        return_value="Report output",
+    ), patch(
+        "sys.argv",
+        [
+            "csv-report-generator",
+            "--files",
+            "employees.csv",
+            "--report",
+            "performance",
+        ],
     ):
-        with patch(
-            "csv_report_generator.__main__.TablePresenter.present",
-            return_value="Report output",
-        ):
-            with patch(
-                "sys.argv",
-                [
-                    "csv-report-generator",
-                    "--files",
-                    "employees.csv",
-                    "--report",
-                    "performance",
-                ],
-            ):
-                result = main()
+        result = main()
 
     captured = capsys.readouterr()
 
@@ -36,18 +34,17 @@ def test_main_handles_application_error(capsys):
     with patch(
         "csv_report_generator.__main__.ReportService.generate",
         side_effect=CSVReportGeneratorError("Something went wrong"),
+    ), patch(
+        "sys.argv",
+        [
+            "csv-report-generator",
+            "--files",
+            "employees.csv",
+            "--report",
+            "performance",
+        ],
     ):
-        with patch(
-            "sys.argv",
-            [
-                "csv-report-generator",
-                "--files",
-                "employees.csv",
-                "--report",
-                "performance",
-            ],
-        ):
-            result = main()
+        result = main()
 
     captured = capsys.readouterr()
 

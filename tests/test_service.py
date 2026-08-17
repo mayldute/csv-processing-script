@@ -1,11 +1,12 @@
-import pytest
 from pathlib import Path
 
-from csv_report_generator.services import ReportService
+import pytest
+
 from csv_report_generator.exceptions import (
     CSVFileNotFoundError,
     UnknownReportError,
 )
+from csv_report_generator.services import ReportService
 
 
 def test_generate_report(mocker):

@@ -1,8 +1,8 @@
 import pytest
 
+from csv_report_generator.exceptions import DuplicateReportError, UnknownReportError
 from csv_report_generator.registry import ReportRegistry
 from csv_report_generator.reports.performance import PerformanceReport
-from csv_report_generator.exceptions import DuplicateReportError, UnknownReportError
 
 
 def test_register_and_get_report():

@@ -1,12 +1,13 @@
-import pytest
 from pathlib import Path
 
-from csv_report_generator.readers.csv_reader import CSVReader
+import pytest
+
 from csv_report_generator.exceptions import (
     CSVFileNotFoundError,
     InvalidCSVFileError,
     MissingColumnsError,
 )
+from csv_report_generator.readers.csv_reader import CSVReader
 
 
 def test_read_valid_csv(tmp_path: Path):

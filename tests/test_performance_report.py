@@ -1,9 +1,10 @@
-import pytest
 from pathlib import Path
 
+import pytest
+
+from csv_report_generator.exceptions import InvalidRowError
 from csv_report_generator.models import CSVRecord
 from csv_report_generator.reports.performance import PerformanceReport
-from csv_report_generator.exceptions import InvalidRowError
 
 
 def test_generate_performance_report():
